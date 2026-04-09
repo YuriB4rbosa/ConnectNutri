@@ -62,22 +62,30 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Show success message
-                    alert('✅ ' + result.message);
-                    
-                    // Redirect to WhatsApp
+                    // 1. Pegar dados
                     const nome = formData.get('nome');
                     const whatsapp = formData.get('whatsapp');
                     const objetivo = formData.get('objetivo');
-                    
-                    const message = `Olá Taynara! Me chamo ${nome} e gostaria de agendar uma consulta.\n\n*Objetivo:* ${objetivo}\n*WhatsApp:* ${whatsapp}\n\nVamos conversar?`;
+    
+                    // 2. Montar mensagem
+                    const message = `Olá Taynara! Me chamo ${nome} e gostaria de agendar uma                consulta.\n\n*Objetivo:* ${objetivo}\n*WhatsApp:* ${whatsapp}\n\nVamos              conversar?`;
                     const encodedMessage = encodeURIComponent(message);
                     const whatsappUrl = `https://wa.me/5561993324869?text=${encodedMessage}`;
-                    
-                    window.location.href = whatsappUrl;
-                    
-                    // Reset form
+    
+                    // 3. Resetar formulário
                     form.reset();
+
+                                // 4. LÓGICA HÍBRIDA (PC vs CELULAR)
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                    if (isMobile) {
+        // No celular, redireciona na mesma aba para forçar a abertura do App
+        window.location.assign(whatsappUrl);
+                    } else {
+        // No PC, abre em uma nova aba para não fechar o seu site
+                        window.open(whatsappUrl, '_blank');
+                    }
+
                 } else {
                     alert('❌ Erro: ' + result.message);
                 }
