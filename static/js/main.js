@@ -72,7 +72,7 @@
                     
                     const message = `Olá Taynara! Me chamo ${nome} e gostaria de agendar uma consulta.\n\n*Objetivo:* ${objetivo}\n*WhatsApp:* ${whatsapp}\n\nVamos conversar?`;
                     const encodedMessage = encodeURIComponent(message);
-                    const whatsappUrl = `https://wa.me/5561993838440?text=${encodedMessage}`;
+                    const whatsappUrl = `https://wa.me/5561993324869?text=${encodedMessage}`;
                     
                     window.open(whatsappUrl, '_blank');
                     
