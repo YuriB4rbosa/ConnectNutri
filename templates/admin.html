@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - ConnectNutri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f8faf9;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #1b4332;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        h2 {
+            color: #1b4332;
+            margin: 30px 0 20px;
+            font-size: 1.5rem;
+        }
+        
+        /* Estatísticas */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #2d6a4f;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .stat-card h3 {
+            color: #6c7a72;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1b4332;
+        }
+        
+        /* Tabela */
+        .table-wrapper {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #2d6a4f;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: #2d3e40;
+        }
+        
+        tr:hover {
+            background: #f8faf9;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: #d8f3dc;
+            color: #1b4332;
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c7a72;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.875rem;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .refresh-btn {
+            background: #2d6a4f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .refresh-btn:hover {
+            background: #1b4332;
+        }
+        
+        .last-update {
+            color: #6c7a72;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Dashboard ConnectNutri</h1>
+            <div>
+                <button class="refresh-btn" onclick="atualizarDados()">🔄 Atualizar</button>
+            </div>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="stats-grid" id="stats">
+            <div class="stat-card">
+                <h3>Total de Contatos</h3>
+                <div class="stat-number" id="total">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Contatos Hoje</h3>
+                <div class="stat-number" id="hoje">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Esta Semana</h3>
+                <div class="stat-number" id="semana">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Este Mês</h3>
+                <div class="stat-number" id="mes">-</div>
+            </div>
+        </div>
+        
+        <h2>📋 Últimos Contatos</h2>
+        <div class="table-wrapper">
+            <table id="contatos-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>WhatsApp</th>
+                        <th>Objetivo</th>
+                        <th>Data/Hora</th>
+                    </tr>
+                </thead>
+                <tbody id="contatos-list">
+                    <tr>
+                        <td colspan="5" class="loading">Carregando...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="last-update" id="lastUpdate" style="margin-top: 20px; text-align: right;"></div>
+    </div>
+    
+    <script>
+        let atualizacaoIntervalo;
+        
+        async function carregarContatos() {
+            try {
+                const response = await fetch('/admin/contatos');
+                const contatos = await response.json();
+                
+                const tbody = document.getElementById('contatos-list');
+                
+                if (!contatos || contatos.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="loading">Nenhum contato registrado ainda.</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = '';
+                
+                contatos.forEach(contato => {
+                    const row = tbody.insertRow();
+                    row.insertCell(0).textContent = contato.id;
+                    row.insertCell(1).textContent = contato.nome;
+                    row.insertCell(2).textContent = formatarWhatsApp(contato.whatsapp);
+                    row.insertCell(3).textContent = contato.objetivo;
+                    
+                    const dataCell = row.insertCell(4);
+                    const data = new Date(contato.data_envio);
+                    dataCell.textContent = data.toLocaleString('pt-BR');
+                });
+            } catch (error) {
+                console.error('Erro ao carregar contatos:', error);
+                document.getElementById('contatos-list').innerHTML = '<tr><td colspan="5" class="loading">Erro ao carregar dados.</td></tr>';
+            }
+        }
+        
+        async function carregarStats() {
+            try {
+                const response = await fetch('/admin/dashboard');
+                const stats = await response.json();
+                
+                document.getElementById('total').textContent = stats.total_contatos || 0;
+                document.getElementById('hoje').textContent = stats.contatos_hoje || 0;
+                document.getElementById('semana').textContent = stats.contatos_semana || 0;
+                document.getElementById('mes').textContent = stats.contatos_mes || 0;
+            } catch (error) {
+                console.error('Erro ao carregar estatísticas:', error);
+            }
+        }
+        
+        function formatarWhatsApp(numero) {
+            // Formata o número do WhatsApp para exibição
+            if (numero.length === 11) {
+                return `(${numero.substring(0,2)}) ${numero.substring(2,7)}-${numero.substring(7)}`;
+            } else if (numero.length === 10) {
+                return `(${numero.substring(0,2)}) ${numero.substring(2,6)}-${numero.substring(6)}`;
+            }
+            return numero;
+        }
+        
+        function atualizarDados() {
+            carregarContatos();
+            carregarStats();
+            
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = `Última atualização: ${now.toLocaleString('pt-BR')}`;
+        }
+        
+        function iniciarAtualizacaoAutomatica() {
+            // Atualizar a cada 30 segundos
+            atualizacaoIntervalo = setInterval(atualizarDados, 30000);
+        }
+        
+        // Carregar dados ao iniciar
+        atualizarDados();
+        iniciarAtualizacaoAutomatica();
+        
+        // Parar atualização quando a página for fechada
+        window.addEventListener('beforeunload', () => {
+            if (atualizacaoIntervalo) {
+                clearInterval(atualizacaoIntervalo);
+            }
+        });
+    </script>
+</body>
+</html>

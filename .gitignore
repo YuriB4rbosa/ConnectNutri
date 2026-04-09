@@ -1,0 +1,19 @@
+# Ambientes Virtuais
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Segurança
+.env
+.flaskenv
+
+# Banco de Dados (não suba dados de clientes)
+*.db
+*.sqlite3
+
+# Sistema/IDE
+.vscode/
+.idea/
+.DS_Store

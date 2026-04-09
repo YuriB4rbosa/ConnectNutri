@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Nutrição Comportamental com Taynara Barbosa - Transforme sua relação com a comida através de uma abordagem personalizada e acolhedora.">
+    <title>ConnectNutri | Taynara Barbosa - Nutrição Comportamental</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__container">
+            <a href="/" class="logo">
+                <span class="logo__icon">🌿</span>
+                <span class="logo__text">Connect<span class="logo__highlight">Nutri</span></span>
+            </a>
+            
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#sobre" class="nav__link">Sobre</a></li>
+                    <li class="nav__item"><a href="#metodologia" class="nav__link">Metodologia</a></li>
+                    <li class="nav__item"><a href="#agendar" class="nav__link nav__link--btn">Agendar</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero__container">
+                <div class="hero__content">
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Bio Card Section -->
+        <section id="sobre" class="bio">
+            <div class="container">
+                <div class="bio__card">
+                    <div class="bio__image">
+                        <div class="bio__photo">
+                            <img src="{{ url_for('static', filename='tay.jpeg') }}" alt="Taynara Barbosa - Nutricionista Comportamental" class="bio__img">
+                        </div>
+                    </div>
+                    <div class="bio__content">
+                        <span class="bio__tag">Quem sou eu</span>
+                        <h2 class="bio__name">Olá, eu sou a Taynara, pós-graduada em Nutrição Comportamental.
+                        </h2>
+                        <p class="bio__crn">CRN 12345 | Especialista em Nutrição Comportamental</p>
+                        <p class="bio__description">
+                            Através da nutrição, te ajudo a construir autonomia alimentar — mostrando que é possível se alimentar bem sem depender de dietas restritas ou de alimentos caros. Comer saudável não precisa ser complicado, e muito menos distante da sua realidade.
+
+Acredito em uma nutrição leve, sem restrições extremas e sem regras impossíveis de seguir.
+Com base na nutrição comportamental e na neurociência, trabalho o que vai além do prato: seus hábitos e a forma como você se relaciona com a comida.
+
+Atuo com foco em emagrecimento, mudança de hábitos e qualidade de vida, sempre respeitando a sua individualidade.
+
+                        </p>
+                        <div class="bio__features">
+    <a href="https://www.instagram.com/taynarabarbosa.nutri/" target="_blank" class="bio__feature">
+        <span class="bio__feature-icon">📸</span>
+        <span>Instagram</span>
+    </a>
+    
+</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metodologia Section (Pilares) -->
+        <section id="metodologia" class="pillars">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-header__subtitle">Metodologia</span>
+                    <h2 class="section-header__title">3 Pilares do<br>Empreendedorismo Social na Alimentação Comportamental</h2>
+                    <p class="section-header__description">
+                        Uma visão integrada que considera todos os aspectos que influenciam sua alimentação. E também um pouco de como funciona o empreendedorismo social na área da alimentação comportamental.
+                    </p>
+                </div>
+
+                <div class="pillars__grid">
+                    <div class="pillar-card">
+                        <div class="pillar-card__icon">🌍</div>
+                        <h3 class="pillar-card__title">Impacto Social</h3>
+                        <p class="pillar-card__description">
+                            Não é só sobre vender serviço — é sobre transformar vidas.
+                            Levar educação alimentar pra quem normalmente não teria acesso e melhorar a relação das pessoas com a comida.
+                        </p>
+                        <div class="pillar-card__benefit">
+                            <span>✓</span> Inclusão alimentar (sem elitizar saúde).
+                        </div>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-card__icon">🧠</div>
+                        <h3 class="pillar-card__title">Educação e Autonomia</h3>
+                        <p class="pillar-card__description">
+                            Ensinar, não só mandar fazer.
+                            O foco é fazer a pessoa entender o próprio comportamento alimentar pra ela conseguir se virar sozinha depois.
+                        </p>
+                        <div class="pillar-card__benefit">
+                            <span>✓</span> Independência (sem depender de “dieta pronta”).
+                        </div>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-card__icon">💡</div>
+                        <h3 class="pillar-card__title">Sustentabilidade do Negócio</h3>
+                        <p class="pillar-card__description">
+                            Projeto social que não se sustenta… morre.
+                            Aqui é fazer dinheiro de forma ética pra manter o impacto acontecendo a longo prazo.
+                        </p>
+                        <div class="pillar-card__benefit">
+                            <span>✓</span> Equilíbrio entre propósito e lucro.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Agendamento Premium -->
+        <section id="agendar" class="appointment">
+            <div class="container">
+                <div class="appointment__wrapper">
+                    <div class="appointment__content">
+                        <span class="appointment__badge">Agende sua consulta</span>
+                        <h2 class="appointment__title">Me conta: <br>O que mais te trava hoje para cuidar da sua aliemntação?</h2>
+                        <p class="appointment__description">
+                            Preencha o formulário e receba um link exclusivo para agendamento. 
+                            Sua primeira conversa é gratuita e sem compromisso.
+                        </p>
+                        <div class="appointment__info">
+                            <div class="info-item">
+                                <span class="info-icon">⏰</span>
+                                <span>Consulta 100% online</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="appointment__form-wrapper">
+                        <form id="appointmentForm" class="appointment-form" method="POST" action="{{ url_for('agendar') }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() if csrf_token else '' }}">
+                            
+                            <div class="form-group">
+                                <label for="nome" class="form-label">Nome completo</label>
+                                <input type="text" id="nome" name="nome" class="form-input" 
+                                       placeholder="Seu nome completo" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="whatsapp" class="form-label">WhatsApp</label>
+                                <input type="tel" id="whatsapp" name="whatsapp" class="form-input" 
+                                       placeholder="(11) 99999-9999" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="objetivo" class="form-label">Qual seu principal objetivo?</label>
+                                <select id="objetivo" name="objetivo" class="form-input" required>
+                                    <option value="" disabled selected>Selecione uma opção</option>
+                                    <option value="Melhorar relação com a comida">Melhorar relação com a comida</option>
+                                    <option value="Perda de peso sustentável">Perda de peso sustentável</option>
+                                    <option value="Ganho de massa muscular">Ganho de massa muscular</option>
+                                    <option value="Saúde e bem-estar">Saúde e bem-estar</option>
+                                    <option value="Condições de saúde específicas">Condições de saúde específicas</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+                                <span class="btn__text">Agendar via WhatsApp →</span>
+                                <span class="btn__loading" style="display: none;">Enviando...</span>
+                            </button>
+                            <p class="form-footer">
+                                Ao enviar, você concorda em receber mensagens no WhatsApp.
+                                Seus dados estão seguros.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <a href="/" class="logo logo--footer">
+                        <span class="logo__icon">🌿</span>
+                        <span class="logo__text" style="color: white;">Connect<span class="logo__highlight">Nutri</span></span>
+                    </a>
+                    <p class="footer__description">
+                        Nutrição comportamental para uma vida mais leve e consciente.
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__column">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="#sobre">Sobre</a></li>
+                            <li><a href="#metodologia">Metodologia</a></li>
+                            <li><a href="#agendar">Agendar</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 ConnectNutri - Taynara Barbosa. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
